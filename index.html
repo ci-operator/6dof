@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6DOF Arm</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity id="armBase" position="0 1 -5" scale="2 2 2">
+        <a-entity id="pivot1" rotation="0 0 0">
+          <a-cylinder id="axis1" position="0 0.1 0" radius="0.2" height="0.2" color="#f00"></a-cylinder>
+          <a-entity id="pivot2" position="0 0.2 0" rotation="0 0 0">
+            <a-box id="axis2" position="0 0.8 0" width="0.2" height="1.6" depth="0.2" color="#0f0"></a-box>
+            <a-entity id="pivot3" position="0 1.6 0" rotation="0 0 0">
+              <a-box id="axis3" position="0 0.8 0" width="0.2" height="1.6" depth="0.2" color="#00f"></a-box>
+              <a-entity id="pivot4" position="0 1.6 0" rotation="0 0 0">
+                <a-box id="axis4" position="0 0.1 0" width="0.2" height="0.2" depth="0.2" color="#ff0"></a-box>
+                <a-entity id="pivot5" position="0.1 0.1 0" rotation="0 0 0">
+                  <a-box id="axis5" position="0.2 0 0" rotation="0 0 90" width="0.2" height="0.2" depth="0.2" color="#f0f"></a-box>
+                  <a-entity id="pivot6" position="0.3 0 0" rotation="0 0 0">
+                    <a-box id="axis6" position="0 0.1 0" width="0.2" height="0.2" depth="0.6" color="#0ff"></a-box>
+                  </a-entity>
+                </a-entity>
+              </a-entity>
+            </a-entity>
+          </a-entity>
+        </a-entity>
+      </a-entity>
+      <a-camera position="0 3.5 5"></a-camera>
+    </a-scene>
+    <div style="position: absolute; top: 20px; left: 20px; z-index: 1000; background: rgba(255,255,255,0.8); padding: 10px;">
+      <label for="axis1_deg">Axis 1 (Yaw):</label>
+      <input type="range" id="axis1_deg" min="-90" max="90" value="0" step="1"><br>
+      <label for="axis2_deg">Axis 2 (Pitch):</label>
+      <input type="range" id="axis2_deg" min="-90" max="90" value="0" step="1"><br>
+      <label for="axis3_deg">Axis 3 (Pitch):</label>
+      <input type="range" id="axis3_deg" min="-90" max="90" value="0" step="1"><br>
+      <label for="axis4_deg">Axis 4 (Yaw):</label>
+      <input type="range" id="axis4_deg" min="-90" max="90" value="0" step="1"><br>
+      <label for="axis5_deg">Axis 5 (Wrist Twist):</label>
+      <input type="range" id="axis5_deg" min="-90" max="90" value="0" step="1"><br>
+      <label for="axis6_deg">Axis 6 (Grabber):</label>
+      <input type="range" id="axis6_deg" min="0" max="90" value="0" step="1"><br>
+    </div>
+    <script>
+       document.getElementById("axis1_deg").addEventListener("input", function () {
+        document.getElementById("pivot1").setAttribute("rotation", {x: 0, y: this.value, z: 0});
+      });
+      document.getElementById("axis2_deg").addEventListener("input", function () {
+        document.getElementById("pivot2").setAttribute("rotation", {x: this.value, y: 0, z: 0});
+      });
+      document.getElementById("axis3_deg").addEventListener("input", function () {
+        document.getElementById("pivot3").setAttribute("rotation", {x: this.value, y: 0, z: 0});
+      });
+      document.getElementById("axis4_deg").addEventListener("input", function () {
+        document.getElementById("pivot4").setAttribute("rotation", {x: 0, y: this.value, z: 0});
+      });
+      document.getElementById("axis5_deg").addEventListener("input", function () {
+        document.getElementById("pivot5").setAttribute("rotation", {x: this.value, y: 0, z: 0});
+      });
+      document.getElementById("axis6_deg").addEventListener("input", function () {
+        document.getElementById("pivot6").setAttribute("rotation", {x: 0, y: this.value, z: 0});
+      });
+    </script>
+  </body>
+</html>
